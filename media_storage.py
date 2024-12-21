@@ -10,13 +10,15 @@ def fileHash(filename:str):
 
 
 #todo: put used hashes into key-value db
-def save_file(filename:str) -> str:
+def save_file(filename:str, bucket = BUCKET_NAME) -> str:
     file_extension = filename.split(".")[-1]
     filename_of_savedFile = fileHash(filename) + '.' + file_extension
-    client.fput_object(BUCKET_NAME, filename_of_savedFile, filename)
+    client.fput_object(bucket, filename_of_savedFile, filename)
     return filename_of_savedFile
     
-def get_file(filename:str):
-    client.fget_object(BUCKET_NAME, filename, TEMPLATE_IMAGE_FILENAME_GET)
+def get_file(filename:str, bucket = BUCKET_NAME):
+    client.fget_object(bucket, filename, TEMPLATE_IMAGE_FILENAME_GET)
     return TEMPLATE_IMAGE_FILENAME_GET
+
+
 

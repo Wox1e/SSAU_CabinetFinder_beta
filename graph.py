@@ -130,3 +130,23 @@ def delete_Node(elementID:str) -> bool:
     
 def delete_edge(sourceNode_elementID:str, destNode_elementID:str, RelationType:str):
     ...
+
+
+def add_properties_to_node(elementID:str, properties:dict) -> bool:
+
+    for key in properties.keys():
+        
+        query_string = f'''
+
+        MATCH (n:landmark)
+        WHERE elementID(n) = "{elementID}"
+        SET n.{key} = '{properties[key]}'
+        RETURN n
+
+        '''
+        try:
+            response = connection.query(query_string, db=NEO4J_DB)
+        except:
+            return False
+
+
