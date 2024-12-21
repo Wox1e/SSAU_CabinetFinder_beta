@@ -1,0 +1,5 @@
+telebot
+python-dotenv
+neo4j
+redis
+minio

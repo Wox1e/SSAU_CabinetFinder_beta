@@ -5,6 +5,7 @@ r = redis.Redis(host=REDIS_HOST, port=REDIS_PORT)
 
 try:
     r.info()
+    print("Connected to Redis")
 except:
     print("Cannot connect to Redis")
 

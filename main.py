@@ -149,17 +149,16 @@ def get_path(message):
 
         for node in nodes:
             name = ""
-
+            
             try:
                 panorama_image_filename = node._properties["panorama_image"]
             except KeyError:
-                pass
+                panorama_image_filename = "3b6e95e3a1b9f54c7b1367c2e7863e2c.jpg" #default panorama
 
-
-            #panorama_url = "localhost:8080/standalone.htm#panorama=minio\bucket\filename"
         
 
-            panorama_url = "https://cdn.pannellum.org/2.5/pannellum.htm#panorama=https://pannellum.org/images/alma.jpg"
+            #panorama_url = "PANNELLUME_SERVICE" + "BUCKET_URL" + panorama_image_filename
+            panorama_url = "google.com"
             button_foo = types.InlineKeyboardButton('Панорама', callback_data='foo', url = panorama_url)
 
             keyboard = types.InlineKeyboardMarkup()
@@ -210,11 +209,11 @@ def nodes_list(message):
         try:
             panorama_image_filename = node._properties["panorama_image"]
         except KeyError:
-            pass
+            panorama_image_filename = "3b6e95e3a1b9f54c7b1367c2e7863e2c.jpg" #default panorama
 
-
-        #panorama_url = "localhost:8080/standalone.htm#panorama=minio\bucket\filename"
-        panorama_url = "https://cdn.pannellum.org/2.5/pannellum.htm#panorama=https://pannellum.org/images/alma.jpg"
+        
+        #panorama_url = "PANNELLUME_SERVICE" + "BUCKET_URL" + panorama_image_filename
+        panorama_url = "google.com"
         button_foo = types.InlineKeyboardButton('Панорама', callback_data='foo', url = panorama_url)
 
         keyboard = types.InlineKeyboardMarkup()

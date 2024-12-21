@@ -1,0 +1,55 @@
+version: '3'
+services:
+  bot_handler:
+    container_name: bot_handler-container
+    build: .
+    env_file:
+      - .env
+    networks:
+      - app-network
+    depends_on:
+      - neo4j
+      - redis
+      - minio
+    restart: on-failure
+  
+  minio:
+    image: bitnami/minio:latest
+    container_name: ${MINIO_CONTAINER_NAME}
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD}
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+
+    networks:
+      - app-network
+
+  redis:
+    image: redis:alpine
+    container_name: ${REDIS_CONTAINER_NAME}
+    ports:
+      - "${REDIS_PORT}:${REDIS_PORT}"
+    networks:
+      - app-network
+
+
+  neo4j:
+    image: neo4j:latest
+    container_name: ${NEO4J_CONTAINER_NAME}
+    environment:
+      - NEO4J_AUTH=${NEO4J_USER}/${NEO4J_PASSWORD}
+    ports: 
+       - "32771:7473"
+       - "32772:7474"
+       - "32773:7687"
+    networks:
+      - app-network
+
+  
+  
+      
+networks:
+  app-network:
+    driver: bridge

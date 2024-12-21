@@ -31,6 +31,7 @@ connection = Neo4jConnection(uri=NEO4J_URI, user=NEO4J_USER, password=NEO4J_PASS
 
 try:
     connection.driver.verify_connectivity()
+    print("Connected to Neo4j")
 except:
     print("Cannot connect to Neo4J")
 

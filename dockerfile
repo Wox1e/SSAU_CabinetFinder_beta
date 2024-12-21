@@ -1,9 +1,9 @@
-FROM python:3.14.0a3-alpine3.20
+FROM python:3.9.20-alpine3.19
 
 WORKDIR /app
 
 COPY . .
 
-EXPOSE 6840
+RUN pip install -r requirements.txt
 
 CMD ["python", "main.py"]

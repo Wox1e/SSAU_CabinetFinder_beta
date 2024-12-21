@@ -3,11 +3,14 @@ import hashlib
 from config import MINIO_ENDPOINT, MINIO_ACCESS_KEY, MINIO_SECRET_KEY, TEMPLATE_IMAGE_FILENAME_GET, BUCKET_NAME
 
 
-client = Minio(MINIO_ENDPOINT, access_key=MINIO_ACCESS_KEY, secret_key=MINIO_SECRET_KEY, secure=False)
+try:
+    client = Minio(MINIO_ENDPOINT, access_key=MINIO_ACCESS_KEY, secret_key=MINIO_SECRET_KEY, secure=False)
+    print("Connected to Minio")
+except:
+    print("Cannot connect to Minio")
 
 def fileHash(filename:str):
     return hashlib.md5(open(filename,'rb').read()).hexdigest()
-
 
 #todo: put used hashes into key-value db
 def save_file(filename:str, bucket = BUCKET_NAME) -> str:
