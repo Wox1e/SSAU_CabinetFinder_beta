@@ -3,7 +3,8 @@ from telebot import types
 from graph import *
 from media_storage import save_file, get_file
 from key_value_table import save_to_idTable, get_from_idTable
-from config import BOT_TOKEN, TEMPLATE_IMAGE_FILENAME_SAVE, NODES_GROUP_NAME, PANORAMA_IMAGE_BUCKET, TEMPLATE_PANORAMA_IMAGE_FILENAME_SAVE
+from config import BOT_TOKEN, TEMPLATE_IMAGE_FILENAME_SAVE, NODES_GROUP_NAME, PANORAMA_IMAGE_BUCKET, TEMPLATE_PANORAMA_IMAGE_FILENAME_SAVE, PANNELUM_URL, PANNELUM_PORT, \
+MINIO_ENDPOINT
 
 bot = telebot.TeleBot(BOT_TOKEN)
 
@@ -158,7 +159,9 @@ def get_path(message):
         
 
             #panorama_url = "PANNELLUME_SERVICE" + "BUCKET_URL" + panorama_image_filename
-            panorama_url = "google.com"
+            image_url = "google.com" + "/" + PANORAMA_IMAGE_BUCKET + '/' + panorama_image_filename
+            panorama_url = PANNELUM_URL + ":" + PANNELUM_PORT + "/src/standalone/pannellum.htm#panorama=" + image_url
+
             button_foo = types.InlineKeyboardButton('Панорама', callback_data='foo', url = panorama_url)
 
             keyboard = types.InlineKeyboardMarkup()
@@ -213,7 +216,11 @@ def nodes_list(message):
 
         
         #panorama_url = "PANNELLUME_SERVICE" + "BUCKET_URL" + panorama_image_filename
-        panorama_url = "google.com"
+        image_url = "google.com" + "/" + PANORAMA_IMAGE_BUCKET + '/' + panorama_image_filename
+        panorama_url = PANNELUM_URL + ":" + PANNELUM_PORT + "/src/standalone/pannellum.htm#panorama=" + image_url
+
+        print(image_url, panorama_url)
+
         button_foo = types.InlineKeyboardButton('Панорама', callback_data='foo', url = panorama_url)
 
         keyboard = types.InlineKeyboardMarkup()

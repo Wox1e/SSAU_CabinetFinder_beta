@@ -6,7 +6,7 @@ services:
     env_file:
       - .env
     networks:
-      - app-network
+      - bot-network
     depends_on:
       - neo4j
       - redis
@@ -24,7 +24,7 @@ services:
       - "9001:9001"
 
     networks:
-      - app-network
+      - bot-network
 
   redis:
     image: redis:alpine
@@ -32,7 +32,7 @@ services:
     ports:
       - "${REDIS_PORT}:${REDIS_PORT}"
     networks:
-      - app-network
+      - bot-network
 
 
   neo4j:
@@ -41,15 +41,15 @@ services:
     environment:
       - NEO4J_AUTH=${NEO4J_USER}/${NEO4J_PASSWORD}
     ports: 
-       - "32771:7473"
-       - "32772:7474"
-       - "32773:7687"
+       - "7473:7473"
+       - "7474:7474"
+       - "7687:7687"
     networks:
-      - app-network
+      - bot-network
 
-  
-  
+
       
 networks:
-  app-network:
+  bot-network:
     driver: bridge
+

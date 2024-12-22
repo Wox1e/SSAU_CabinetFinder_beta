@@ -30,6 +30,7 @@ class Neo4jConnection:
 connection = Neo4jConnection(uri=NEO4J_URI, user=NEO4J_USER, password=NEO4J_PASSWORD)
 
 try:
+    print(f"Trying to connect to Neo4j ({NEO4J_URI})")
     connection.driver.verify_connectivity()
     print("Connected to Neo4j")
 except:
@@ -131,7 +132,6 @@ def delete_Node(elementID:str) -> bool:
     
 def delete_edge(sourceNode_elementID:str, destNode_elementID:str, RelationType:str):
     ...
-
 
 def add_properties_to_node(elementID:str, properties:dict) -> bool:
 
